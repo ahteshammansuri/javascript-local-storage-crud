@@ -21,15 +21,15 @@ jQuery(document).ready(function () {
       productCategory: {
         required: true,
       },
-      // "product[image]": {
-      //     required: true
-      // },
+      productImage: {
+          required: true
+      },
     },
   });
 
   getProductData();
   getCategoryData();
-  
+
   jQuery("#cancel").click(function () {
     afterUpdateChanges(this);
   });
@@ -41,12 +41,42 @@ jQuery(document).ready(function () {
     });
   }
 
+  // window.addEventListener('load', function() {
+  document.getElementById("productImage").addEventListener('change', function () {
+    if (this.files && this.files[0]) {
+      console.log(URL.createObjectURL(this.files[0]));
+      // console.log(files);
+      var img = document.querySelector('img');
+      console.log(img);
+      img.onload = () => {
+        URL.revokeObjectURL(img.src);  // no longer needed, free memory
+
+      }
+
+      img.src = URL.createObjectURL(this.files[0]); // set src to blob url
+    }
+  });
+  // });
+
+  var productImage = document.getElementById("productImage");
+  if (productImage != null && productImage) {
+    productImage.addEventListener('change', (event) => {
+      var image = event.target.files[0];
+      var reader = new FileReader();
+      reader.readAsDataURL(image);
+      reader.addEventListener('load', () => {
+        imagePath = reader.result;
+      });
+    });
+  }
 
 });
 
 var productData = "productData";
 var storeArr = [];
 let id = "null";
+var imagePath = "";
+
 
 function getCategoryData() {
   var productDataObj = getProductDataObj();
@@ -64,7 +94,7 @@ function getCategoryData() {
         "<button id='viewProducts' class='btn btn-primary' onclick='productGridByCategory(\"" + category + "\")'>View</button></td></tr>";
     });
     document.getElementById("categoryData").innerHTML = categoryTableData;
-  }else{
+  } else {
     document.getElementById("categoryData").innerHTML = "<td></td><td>No Records Found</td>";
   }
 }
@@ -94,6 +124,7 @@ function productGridByCategory(category) {
 }
 
 
+
 function addProductData() {
   var formId = jQuery("#addProductForm");
   if (formId.valid()) {
@@ -106,6 +137,7 @@ function addProductData() {
       productPrice,
       productDescription,
       productCategory,
+      imagePath
     };
     storeArr.push(productObj);
     setProductDataObj(storeArr);
@@ -135,7 +167,7 @@ function getProductData(category = null) {
     getProductObj.forEach(function (arrayItem, key) {
       if (arrayItem.productCategory == category || category == null) {
         tableData = tableData +
-          "<tr><td><img src='#' /></td><td>" +
+          "<tr><td><img src='" + arrayItem.imagePath + "' height='100' width='100' /></td><td>" +
           arrayItem.productTitle +
           "</td><td>" +
           arrayItem.productCategory +
@@ -154,7 +186,7 @@ function getProductData(category = null) {
     if (productDataRow) {
       productDataRow.innerHTML = tableData;
     }
-  }else{
+  } else {
     productDataRow.innerHTML = "<td></td><td></td><td>No Records Found</td>";
   }
 }
@@ -166,6 +198,7 @@ function editProduct(indexOf) {
   document.getElementById("productPrice").value = arr[indexOf].productPrice;
   document.getElementById("productDescription").value = arr[indexOf].productDescription;
   document.getElementById("productCategory").value = arr[indexOf].productCategory;
+  document.getElementById("imagePath").src = arr[indexOf].imagePath;
   document.getElementById("cancel").setAttribute("style", "display: block");
   document.getElementById("productInfo").innerHTML = "Update Product";
   document.getElementById("update").setAttribute("style", "display: block");
@@ -177,18 +210,19 @@ function updateProduct() {
   if (id != "null") {
     var formId = jQuery("#addProductForm");
     if (formId.valid()) {
-    let arr = getProductDataObj();
-    arr[id].productTitle = document.getElementById("productTitle").value;
-    arr[id].productPrice = document.getElementById("productPrice").value;
-    arr[id].productDescription = document.getElementById("productDescription").value;
-    arr[id].productCategory = document.getElementById("productCategory").value;
-    setProductDataObj(arr);
-    getProductData();
-    afterUpdateChanges();
-    document.getElementById("update").setAttribute("href", "#productGrid");
-    document.getElementById("alertNotification").setAttribute("style", "display: block");
-    document.getElementById("notificationText").innerHTML = "Product Updated successfully";
-    notificationAutoClosed();
+      let arr = getProductDataObj();
+      arr[id].productTitle = document.getElementById("productTitle").value;
+      arr[id].productPrice = document.getElementById("productPrice").value;
+      arr[id].productDescription = document.getElementById("productDescription").value;
+      arr[id].productCategory = document.getElementById("productCategory").value;
+      arr[id].imagePath = imagePath;
+      setProductDataObj(arr);
+      getProductData();
+      afterUpdateChanges();
+      document.getElementById("update").setAttribute("href", "#productGrid");
+      document.getElementById("alertNotification").setAttribute("style", "display: block");
+      document.getElementById("notificationText").innerHTML = "Product Updated successfully";
+      notificationAutoClosed();
     }
   }
 }
