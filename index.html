@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Add Product</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
+  <script src="main.js"></script>
+  <!-- <script src="main.js"></script> -->
+
+</head>
+ 
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="">Navbar</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="#productAdd">Add Products <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#productGrid">Product Grid</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#categoryGrid">Category Grid</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div id="addProductDiv" style="display: none">
+      <h1 align="center" id="productInfo">Add Product Form</h1>
+      <br />
+      <form id="addProductForm" action="/productGrid.html">
+        <div class="d-flex justify-content-center pl-4 pr-4">
+          <div class="form-group col-md-3">
+            <label for="inputEmail4">Product Title</label>
+            <input type="text" class="form-control" id="productTitle" name="productTitle" placeholder="Product Title" />
+          </div>
+          <div class="form-group col-md-3">
+            <label for="inputPassword4">Price</label>
+            <input type="text" class="form-control" id="productPrice" name="productPrice" placeholder="Price" />
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+          <div class="form-group col-md-6">
+            <label for="exampleFormControlTextarea1">Description</label>
+            <textarea class="form-control" id="productDescription" name="productDescription" rows="3"
+              placeholder="Type here"></textarea>
+          </div>
+        </div>
+        <div class="d-flex justify-content-center pl-4 pr-4">
+          <div class="form-group col-md-3">
+            <label for="productCategory">Category</label>
+            <select id="productCategory" name="productCategory" class="form-control">
+              <option selected disabled>Choose...</option>
+              <option>Cloths</option>
+              <option>Elecronics</option>
+            </select>
+          </div>
+          <!-- <div class="form-group col-md-3">
+            <label for="exampleFormControlFile1"></label>
+            <input type="file" class="form-control-file" id="productImage" name="product[image]">
+        </div> -->
+        </div>
+        <div class="text-center form-inline" id="btn-div">
+          <a id="productSave" type="button" class="btn btn-primary" onclick="addProductData()">
+            Save
+          </a>
+          <a id="update" type="button" class="btn btn-info" style="display: none;" onclick="updateProduct()">
+            Update
+          </a>
+          <a id="cancel" href="#productGrid" type="button" class="btn btn-warning" style="display: none;">
+            Cancel
+          </a>
+        </div>
+      </form>
+
+    </div>
+    <br>
+
+    <div id="productGridData" style="display: none">
+      
+      <div class="alert alert-success alert-dismissible fade show" role="alert" id="alertNotification" style="display: none">
+        <strong id="notificationText"></strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <h1 align="center">Product Grid</h1>
+      <br />
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Product Image</th>
+            <th scope="col">Product Title</th>
+            <th scope="col">Category</th>
+            <th scope="col">Price</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody id="productDataRow"></tbody>
+      </table>
+    </div>
+
+    <div id="categoryGridDiv" style="display: none">
+      <h1 align="center" id="productInfo">Category Grid</h1>
+      <br />
+      <div class="d-flex justify-content-center">
+
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Category Name</th>
+              <th scope="col">View Product</th>
+            </tr>
+          </thead>
+          <tbody id="categoryData"></tbody>
+        </table>
+      </div>
+      <br />
+      <br />
+      <div id="categoryGridData" style="display: none">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product Image</th>
+              <th scope="col">Product Title</th>
+              <th scope="col">Category</th>
+              <th scope="col">Price</th>
+              <th scope="col">Action</th>
+            </tr>
+          </thead>
+          <tbody id="categoryProductDataRow"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="singlePageCheck.js"></script>
+
+</body>
+
+</html>
