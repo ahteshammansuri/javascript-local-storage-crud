@@ -22,7 +22,7 @@ function loadContent() {
     document.getElementById("productSave").removeAttribute("href");
     document.getElementById("update").removeAttribute("href");
   }
- 
+
 }
 
 if (!location.hash) {

@@ -23,7 +23,7 @@ jQuery(document).ready(function () {
       },
       // "product[image]": {
       //     required: true
-      // }, 
+      // },
     },
   });
 
@@ -33,6 +33,13 @@ jQuery(document).ready(function () {
   jQuery("#cancel").click(function () {
     afterUpdateChanges(this);
   });
+
+  var getProductObj = getProductDataObj();
+  if (getProductObj) {
+    getProductObj.forEach(function (arrayItem, key) {
+      storeArr.push(arrayItem);
+    });
+  }
 
 
 });
