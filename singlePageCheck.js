@@ -7,6 +7,7 @@ function loadContent() {
     document.getElementById("categoryGridData").setAttribute("style", "display: none;");
     document.getElementById("productSave").removeAttribute("href");
     document.getElementById("update").removeAttribute("href");
+    afterUpdateChanges();
   } else if (fragmentId == 'productAdd') {
     document.getElementById("addProductDiv").setAttribute("style", "display: block");
     document.getElementById("productGridData").setAttribute("style", "display: none");
@@ -21,6 +22,7 @@ function loadContent() {
     document.getElementById("categoryGridData").setAttribute("style", "display: none;");
     document.getElementById("productSave").removeAttribute("href");
     document.getElementById("update").removeAttribute("href");
+    afterUpdateChanges();
   }
 
 }
