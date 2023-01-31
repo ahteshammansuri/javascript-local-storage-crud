@@ -68,12 +68,14 @@
               <option selected disabled>Choose...</option>
               <option>Cloths</option>
               <option>Elecronics</option>
+              <option>Gaming</option>
             </select>
           </div>
-          <!-- <div class="form-group col-md-3">
+          <div class="form-group col-md-3">
             <label for="exampleFormControlFile1"></label>
-            <input type="file" class="form-control-file" id="productImage" name="product[image]">
-        </div> -->
+            <input type="file" class="form-control-file" id="productImage" name="productImage" accept=".jpg">
+            <img src="" alt="" id="imagePath" height="100" width="100">
+        </div>
         </div>
         <div class="text-center form-inline" id="btn-div">
           <a id="productSave" type="button" class="btn btn-primary" onclick="addProductData()">
@@ -81,8 +83,8 @@
           </a>
           <a id="update" type="button" class="btn btn-info" style="display: none;" onclick="updateProduct()">
             Update
-          </a>
-          <a id="cancel" href="#productGrid" type="button" class="btn btn-warning" style="display: none;">
+          </a> 
+           <a id="cancel" href="#productGrid" type="button" class="btn btn-warning" style="display: none;">
             Cancel
           </a>
         </div>

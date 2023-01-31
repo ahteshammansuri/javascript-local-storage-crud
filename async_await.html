@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Async Await Function In Javascript</title>
+</head>
+<body>
+</body>
+</html>
+
+<script>
+    async function fatchUsers () {
+        console.log("First Inside in Function");
+        console.log("Before fatch api");
+        const userData = await fetch("https://jsonplaceholder.typicode.com/users");
+        console.log("After fatch api");
+        console.log("Before .json format");
+        const getUser = userData.json();
+        console.log("After .json format");
+        // console.log(userData);
+        return getUser;
+        // return userData;
+    }
+    console.log("After Declaration of Function");
+    let funCall = fatchUsers();
+    console.log(funCall);
+    funCall.then(function (data) {
+        console.log(data);
+    });
+    console.log("After Called function");
+</script>

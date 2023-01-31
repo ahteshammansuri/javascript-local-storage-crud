@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Practice 3.2</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    var string = "aabcde", pattern = "*c*";
+    // string.match("*");
+    var char = pattern.split("*");
+    // console.log(char);
+    console.log(pattern.match(/[^\w\s]/i));
+    console.log(pattern.search(/[^\w\s]/i));
+    console.log(string.match(/c/i));
+</script>
